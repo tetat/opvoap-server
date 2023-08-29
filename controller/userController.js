@@ -21,7 +21,7 @@ module.exports.signUp = async (req, res) => {
       sameSite: "none",
       maxAge: process.env.TOKEN_AGE,
     });
-    res.status(201).json({ id: people._id, email: people.email });
+    res.status(201).json({ id: people._id, email: people.email, jwt: token });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
@@ -40,7 +40,7 @@ module.exports.logIn = async (req, res) => {
       sameSite: "none",
       maxAge: process.env.TOKEN_AGE,
     });
-    res.status(201).json({ email: people.email });
+    res.status(201).json({ email: people.email, jwt: token });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });

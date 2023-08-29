@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "Mario",
+    "lastName": "Potter",
+    "email": "mario@google.com",
+    "password": "Test.123"
+  },
+  {
+    "firstName": "Ginny",
+    "lastName": "Peach",
+    "email": "ginny@google.com",
+    "password": "Test.123"
+  },
+  {
+    "firstName": "Luigi",
+    "lastName": "Weasley",
+    "email": "luigi@google.com",
+    "password": "Test.123"
+  },
+  {
+    "firstName": "Daisy",
+    "lastName": "Granger",
+    "email": "daisy@google.com",
+    "password": "Test.123"
+  },
+  {
+    "firstName": "Toad",
+    "lastName": "Malfoy",
+    "email": "toad@google.com",
+    "password": "Test.123"
+  },
+  {
+    "firstName": "Neville",
+    "lastName": "Yoshi",
+    "email": "yoshi@google.com",
+    "password": "Test.123"
+  }
+]

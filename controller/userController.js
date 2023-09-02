@@ -15,12 +15,12 @@ module.exports.signUp = async (req, res) => {
     });
     const token = createToken(people._id);
     // res.cookie("jwt", token, { httpOnly: true, maxAge: process.env.TOKEN_AGE });
-    res.cookie("jwt", token, {
-      // httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: process.env.TOKEN_AGE,
-    });
+    // res.cookie("jwt", token, {
+    //   // httpOnly: true,
+    //   secure: true,
+    //   sameSite: "none",
+    //   maxAge: process.env.TOKEN_AGE,
+    // });
     res.status(201).json({ id: people._id, email: people.email, jwt: token });
   } catch (err) {
     const errors = handleErrors(err);
@@ -34,12 +34,12 @@ module.exports.logIn = async (req, res) => {
   try {
     const people = await Peoples.login(email, password);
     const token = createToken(people._id);
-    res.cookie("jwt", token, {
-      // httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      maxAge: process.env.TOKEN_AGE,
-    });
+    // res.cookie("jwt", token, {
+    //   // httpOnly: true,
+    //   secure: true,
+    //   sameSite: "none",
+    //   maxAge: process.env.TOKEN_AGE,
+    // });
     res.status(201).json({ email: people.email, jwt: token });
   } catch (err) {
     const errors = handleErrors(err);
@@ -47,14 +47,14 @@ module.exports.logIn = async (req, res) => {
   }
 };
 // log out. method: GET
-module.exports.logOut = (req, res) => {
-  try {
-    res.cookie("jwt", "", { maxAge: 1 });
-    res.status(201).json({ message: "Logout Successfull" });
-  } catch (err) {
-    res.status(500).send({ error: "Server side error!" });
-  }
-};
+// module.exports.logOut = (req, res) => {
+//   try {
+//     res.cookie("jwt", "", { maxAge: 1 });
+//     res.status(201).json({ message: "Logout Successfull" });
+//   } catch (err) {
+//     res.status(500).send({ error: "Server side error!" });
+//   }
+// };
 
 // get all admins. method: GET
 module.exports.admins = async (req, res) => {

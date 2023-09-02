@@ -8,9 +8,9 @@ const router = express.Router();
 // users section
 router.post("/signup", userController.signUp);
 router.post("/login", userController.logIn);
-router.get("/logout", isUser, userController.logOut);
+// router.get("/logout", isUser, userController.logOut);
 router.get("/admins", userController.admins);
 router.get("/myproducts", isAdmin, userController.getMe);
-router.get("/curuser", isUser, userController.currentUser);
+router.get("/curuser", userController.currentUser);
 
 module.exports = router;

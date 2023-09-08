@@ -97,7 +97,7 @@ module.exports.getMe = async (req, res) => {
 
 module.exports.currentUser = async (req, res) => {
   try {
-    const id = tokenId(req.cookies.jwt);
+    const id = ObjectId(tokenId(req.cookies.jwt));
     const people = await Peoples.findOne({ _id: id }).select({
       _id: 0,
       __v: 0,

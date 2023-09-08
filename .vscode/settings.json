@@ -7,5 +7,7 @@
   "[html]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "editor.fontSize": 14,
+  "editor.tabSize": 2
 }

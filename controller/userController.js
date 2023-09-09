@@ -107,11 +107,6 @@ module.exports.currentUser = async (req, res) => {
       // console.log("Error: ", err);
       // console.log("Id: ", id);
     });
-
-    // res.status(200).json({
-    //   jwt: "toke: " + req.cookies.jwt,
-    //   id,
-    // });
     const people = await Peoples.findById({ _id: id }).select({
       _id: 0,
       __v: 0,
@@ -124,7 +119,7 @@ module.exports.currentUser = async (req, res) => {
       res.status(400).json({ id: "id not valid" });
     }
   } catch (err) {
-    console.log("error: ", err);
+    // console.log("error: ", err);
     res.status(500).send({ err });
     // res.status(500).send({ message: "Server side error!" });
   }

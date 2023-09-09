@@ -98,10 +98,16 @@ module.exports.getMe = async (req, res) => {
 module.exports.currentUser = async (req, res) => {
   // console.log("jwt: ", req.cookies.jwt);
   try {
-    const id = tokenId(req.cookies.jwt);
+    // let id = "";
+    // jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
+    //   if (!err) {
+    //     id = decodedToken._id;
+    //   }
+    //   // console.log("Error: ", err);
+    //   // console.log("Id: ", id);
+    // });
 
     res.status(200).json({
-      id,
       jwt: req.cookies.jwt,
     });
     // const people = await Peoples.findById({ _id: id }).select({

@@ -108,7 +108,7 @@ module.exports.currentUser = async (req, res) => {
     // });
 
     res.status(200).json({
-      jwt: req.cookies.jwt,
+      jwt: "toke: " + req.cookies.jwt,
     });
     // const people = await Peoples.findById({ _id: id }).select({
     //   _id: 0,

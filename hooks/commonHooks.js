@@ -14,6 +14,7 @@ const tokenId = (token) => {
     // console.log("Error: ", err);
     // console.log("Id: ", id);
   });
+  // console.log("id: ", id);
   return id;
 };
 

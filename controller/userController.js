@@ -96,19 +96,23 @@ module.exports.getMe = async (req, res) => {
 };
 
 module.exports.currentUser = async (req, res) => {
+  // console.log("jwt: ", req.cookies.jwt);
   try {
-    const id = ObjectId(tokenId(req.cookies.jwt));
-    const people = await Peoples.findOne({ _id: id }).select({
+    const id = tokenId(req.cookies.jwt);
+    // console.log("id: ", id);
+    const people = await Peoples.findById({ _id: id }).select({
       _id: 0,
       __v: 0,
       password: 0,
     });
+    // console.log("id: ", id);
     if (people) {
       res.status(201).json(people);
     } else {
       res.status(400).json({ id: "id not valid" });
     }
   } catch (err) {
+    // console.log("error: ", err);
     res.status(500).send({ err });
     // res.status(500).send({ message: "Server side error!" });
   }

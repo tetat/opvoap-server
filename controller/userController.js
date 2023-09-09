@@ -96,28 +96,31 @@ module.exports.getMe = async (req, res) => {
   }
 };
 
-module.exports.currentUser = async (req, res) => {
+module.exports.currentUser = (req, res) => {
   // console.log("jwt: ", req.cookies.jwt);
   try {
-    let id = "";
-    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
-      if (!err) {
-        id = decodedToken._id;
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.JWT_SECRET,
+      async (err, decodedToken) => {
+        if (err) {
+          res.status(400).json({ id: "id not valid" });
+        } else {
+          const people = await Peoples.findById({
+            _id: decodedToken._id,
+          }).select({
+            _id: 0,
+            __v: 0,
+            password: 0,
+          });
+          if (people) {
+            res.status(201).json({ people });
+          } else {
+            res.status(400).json({ id: "id not valid" });
+          }
+        }
       }
-      // console.log("Error: ", err);
-      // console.log("Id: ", id);
-    });
-    const people = await Peoples.findById({ _id: id }).select({
-      _id: 0,
-      __v: 0,
-      password: 0,
-    });
-    // console.log("id: ", id);
-    if (people) {
-      res.status(201).json({ people });
-    } else {
-      res.status(400).json({ id: "id not valid" });
-    }
+    );
   } catch (err) {
     // console.log("error: ", err);
     res.status(500).send({ err });

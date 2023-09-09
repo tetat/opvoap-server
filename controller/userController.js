@@ -119,7 +119,7 @@ module.exports.currentUser = async (req, res) => {
     });
     // console.log("id: ", id);
     if (people) {
-      res.status(201).json(people);
+      res.status(201).json({ people });
     } else {
       res.status(400).json({ id: "id not valid" });
     }

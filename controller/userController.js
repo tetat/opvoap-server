@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const { createToken, handleErrors } = require("../hooks/userHooks");
 const Peoples = require("../models/People");
 const { tokenId } = require("../hooks/commonHooks");
@@ -98,31 +99,32 @@ module.exports.getMe = async (req, res) => {
 module.exports.currentUser = async (req, res) => {
   // console.log("jwt: ", req.cookies.jwt);
   try {
-    // let id = "";
-    // jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
-    //   if (!err) {
-    //     id = decodedToken._id;
-    //   }
-    //   // console.log("Error: ", err);
-    //   // console.log("Id: ", id);
-    // });
-
-    res.status(200).json({
-      jwt: "toke: " + req.cookies.jwt,
+    let id = "";
+    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
+      if (!err) {
+        id = decodedToken._id;
+      }
+      // console.log("Error: ", err);
+      // console.log("Id: ", id);
     });
-    // const people = await Peoples.findById({ _id: id }).select({
-    //   _id: 0,
-    //   __v: 0,
-    //   password: 0,
+
+    // res.status(200).json({
+    //   jwt: "toke: " + req.cookies.jwt,
+    //   id,
     // });
-    // // console.log("id: ", id);
-    // if (people) {
-    //   res.status(201).json(people);
-    // } else {
-    //   res.status(400).json({ id: "id not valid" });
-    // }
+    const people = await Peoples.findById({ _id: id }).select({
+      _id: 0,
+      __v: 0,
+      password: 0,
+    });
+    // console.log("id: ", id);
+    if (people) {
+      res.status(201).json(people);
+    } else {
+      res.status(400).json({ id: "id not valid" });
+    }
   } catch (err) {
-    // console.log("error: ", err);
+    console.log("error: ", err);
     res.status(500).send({ err });
     // res.status(500).send({ message: "Server side error!" });
   }
